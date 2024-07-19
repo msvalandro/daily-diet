@@ -7,4 +7,7 @@ export const HomeContainer = styled(SafeAreaView)`
   flex: 1;
 `
 
-export const Title = styled.Text``
+export const Title = styled.Text`
+  margin-top: 40px;
+  margin-bottom: 8px;
+`
