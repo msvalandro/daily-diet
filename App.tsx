@@ -3,9 +3,10 @@ import {
   NunitoSans_700Bold,
   useFonts,
 } from '@expo-google-fonts/nunito-sans'
-import { Text, View } from 'react-native'
+import { StatusBar, Text } from 'react-native'
 import { ThemeProvider } from 'styled-components/native'
 
+import { Routes } from './src/routes'
 import theme from './src/theme'
 
 export default function App() {
@@ -13,9 +14,12 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        {fontsLoaded ? <Text>hello world</Text> : <Text>Loading...</Text>}
-      </View>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent
+      />
+      {fontsLoaded ? <Routes /> : <Text>Loading...</Text>}
     </ThemeProvider>
   )
 }
