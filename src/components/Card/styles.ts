@@ -13,6 +13,9 @@ export const CardContainer = styled.TouchableOpacity<CardContainerProps>`
   background-color: ${({ theme, type }) =>
     type === 'PRIMARY' ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
   border-radius: 8px;
+
+  align-items: center;
+  justify-content: center;
 `
 
 export const Icon = styled(ArrowUpRight).attrs(({ theme }) => ({

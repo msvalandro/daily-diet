@@ -6,10 +6,12 @@ interface CardProps extends TouchableOpacityProps {
   type?: CardTypeStyleProps
 }
 
-export function Card({ type = 'PRIMARY', ...rest }: CardProps) {
+export function Card({ type = 'PRIMARY', children, ...rest }: CardProps) {
   return (
     <CardContainer type={type} {...rest}>
       <Icon />
+
+      {children}
     </CardContainer>
   )
 }

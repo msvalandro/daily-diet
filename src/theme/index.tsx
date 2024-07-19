@@ -19,8 +19,8 @@ export default {
     RED_DARK: '#BF3B44',
   },
   FONT_FAMILY: {
-    REGULAR: 'Roboto_400Regular',
-    BOLD: 'Roboto_700Bold',
+    REGULAR: 'NunitoSans_400Regular',
+    BOLD: 'NunitoSans_700Bold',
   },
   FONT_SIZE: {
     XS: 12,
