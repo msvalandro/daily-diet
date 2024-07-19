@@ -1,9 +1,10 @@
+import { Loading } from '@components/Loading'
 import {
   NunitoSans_400Regular,
   NunitoSans_700Bold,
   useFonts,
 } from '@expo-google-fonts/nunito-sans'
-import { StatusBar, Text } from 'react-native'
+import { StatusBar } from 'react-native'
 import { ThemeProvider } from 'styled-components/native'
 
 import { Routes } from './src/routes'
@@ -19,7 +20,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded ? <Routes /> : <Text>Loading...</Text>}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   )
 }
