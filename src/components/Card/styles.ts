@@ -1,28 +1,22 @@
-import { ArrowUpRight } from 'phosphor-react-native'
 import styled from 'styled-components/native'
 
-export type CardTypeStyleProps = 'PRIMARY' | 'SECONDARY'
+export type CardTypeStyleProps = 'SUCCESS' | 'DANGER' | 'DEFAULT'
 
 interface CardContainerProps {
   type: CardTypeStyleProps
 }
 
-export const CardContainer = styled.TouchableOpacity<CardContainerProps>`
+export const CardContainer = styled.View<CardContainerProps>`
   height: 102px;
 
   background-color: ${({ theme, type }) =>
-    type === 'PRIMARY' ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
+    type === 'SUCCESS'
+      ? theme.COLORS.GREEN_LIGHT
+      : type === 'DANGER'
+        ? theme.COLORS.RED_LIGHT
+        : theme.COLORS.GRAY_600};
   border-radius: 8px;
 
   align-items: center;
   justify-content: center;
-`
-
-export const Icon = styled(ArrowUpRight).attrs(({ theme }) => ({
-  size: 24,
-  color: theme.COLORS.GREEN_DARK,
-}))`
-  position: absolute;
-  top: 8px;
-  right: 8px;
 `
