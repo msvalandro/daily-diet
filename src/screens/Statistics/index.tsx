@@ -1,9 +1,12 @@
+import { Card } from '@components/Card'
 import { Highlight } from '@components/Highlight'
 import { useNavigation } from '@react-navigation/native'
 
 import {
   BackIcon,
   Content,
+  Row,
+  StatisticsCard,
   StatisticsContainer,
   StatisticsHeader,
   Title,
@@ -25,6 +28,28 @@ export function Statistics() {
 
       <Content>
         <Title>Estatísticas gerais</Title>
+
+        <StatisticsCard
+          title="22"
+          subtitle="melhor sequência de pratos dentro da dieta"
+        />
+        <StatisticsCard title="109" subtitle="refeições registradas" />
+
+        <Row>
+          <StatisticsCard
+            fromRow
+            isFirst
+            type="SUCCESS"
+            title="99"
+            subtitle="refeições dentro da dieta"
+          />
+          <StatisticsCard
+            fromRow
+            type="DANGER"
+            title="10"
+            subtitle="refeições fora da dieta"
+          />
+        </Row>
       </Content>
     </StatisticsContainer>
   )
