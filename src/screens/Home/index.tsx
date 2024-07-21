@@ -17,6 +17,10 @@ export function Home() {
     navigation.navigate('register')
   }
 
+  function handleGoToMeal() {
+    navigation.navigate('meal')
+  }
+
   return (
     <HomeContainer>
       <Header />
@@ -33,7 +37,7 @@ export function Home() {
 
       <Title>Refeições</Title>
 
-      <Button title="Nova refeição" Icon={Plus} onPress={handleNewMeal} />
+      <Button title="Nova refeição" Icon={Plus} onPress={handleGoToMeal} />
     </HomeContainer>
   )
 }

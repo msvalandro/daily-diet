@@ -19,7 +19,7 @@ export function Register() {
   const navigation = useNavigation()
 
   function handleGoBack() {
-    navigation.navigate('home')
+    navigation.goBack()
   }
 
   function handleRegisterMeal() {

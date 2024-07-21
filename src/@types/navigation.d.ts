@@ -5,6 +5,7 @@ export declare global {
       statistics: undefined
       register: undefined
       finished: { valid: boolean }
+      meal: undefined
     }
   }
 }

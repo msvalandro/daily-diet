@@ -17,6 +17,12 @@ export const ButtonContainer = styled.TouchableOpacity<ButtonProps>`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
+  ${({ theme, type }) =>
+    type === 'SECONDARY' &&
+    css`
+      border: 1px solid ${theme.COLORS.GRAY_200};
+    `}
 `
 
 export const Title = styled.Text<ButtonProps>`
