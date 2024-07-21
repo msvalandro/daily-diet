@@ -40,11 +40,6 @@ export const Content = styled.View`
   border-top-right-radius: 20px;
 `
 
-export const Row = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`
-
 interface StatisticsCardProps {
   fromRow?: boolean
   isFirst?: boolean

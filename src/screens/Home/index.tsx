@@ -9,15 +9,19 @@ import { CardContainer, CardIcon, HomeContainer, Title } from './styles'
 export function Home() {
   const navigation = useNavigation()
 
-  function handleNavigateToStatistics() {
+  function handleGoToStatistics() {
     navigation.navigate('statistics')
+  }
+
+  function handleNewMeal() {
+    navigation.navigate('register')
   }
 
   return (
     <HomeContainer>
       <Header />
 
-      <CardContainer onPress={handleNavigateToStatistics}>
+      <CardContainer onPress={handleGoToStatistics}>
         <Card
           title="90,86%"
           subtitle="das refeições dentro da dieta"
@@ -29,7 +33,7 @@ export function Home() {
 
       <Title>Refeições</Title>
 
-      <Button title="Nova refeição" Icon={Plus} />
+      <Button title="Nova refeição" Icon={Plus} onPress={handleNewMeal} />
     </HomeContainer>
   )
 }

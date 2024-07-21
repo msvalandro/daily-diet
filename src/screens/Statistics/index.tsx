@@ -1,11 +1,10 @@
-import { Card } from '@components/Card'
 import { Highlight } from '@components/Highlight'
+import { Row } from '@components/Row'
 import { useNavigation } from '@react-navigation/native'
 
 import {
   BackIcon,
   Content,
-  Row,
   StatisticsCard,
   StatisticsContainer,
   StatisticsHeader,
