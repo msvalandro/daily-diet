@@ -2,6 +2,7 @@ import { Button } from '@components/Button'
 import { RadioGroup } from '@components/RadioGroup'
 import { Row } from '@components/Row'
 import { useNavigation } from '@react-navigation/native'
+import { Controller, useForm } from 'react-hook-form'
 
 import {
   BackIcon,
@@ -15,15 +16,26 @@ import {
   TitleContainer,
 } from './styles'
 
+interface FormDataProps {
+  name: string
+  description: string
+  date: string
+  hour: string
+  valid: boolean
+}
+
 export function Register() {
+  const { control, handleSubmit } = useForm<FormDataProps>()
+
   const navigation = useNavigation()
 
   function handleGoBack() {
     navigation.goBack()
   }
 
-  function handleRegisterMeal() {
-    navigation.navigate('finished', { valid: true })
+  function handleRegisterMeal(data: FormDataProps) {
+    console.log(data)
+    // navigation.navigate('finished', { valid: true })
   }
 
   return (
@@ -39,32 +51,66 @@ export function Register() {
       <Form>
         <InputContainer>
           <Label>Nome</Label>
-          <Input />
+          <Controller
+            control={control}
+            name="name"
+            render={({ field: { value, onChange } }) => (
+              <Input value={value} onChangeText={onChange} />
+            )}
+          />
         </InputContainer>
 
         <InputContainer>
           <Label>Descrição</Label>
-          <Input />
+          <Controller
+            control={control}
+            name="description"
+            render={({ field: { value, onChange } }) => (
+              <Input value={value} onChangeText={onChange} />
+            )}
+          />
         </InputContainer>
 
         <Row>
           <InputContainer fromRow style={{ marginRight: 10 }}>
             <Label>Data</Label>
-            <Input />
+            <Controller
+              control={control}
+              name="date"
+              render={({ field: { value, onChange } }) => (
+                <Input value={value} onChangeText={onChange} />
+              )}
+            />
           </InputContainer>
 
           <InputContainer fromRow style={{ marginLeft: 10 }}>
             <Label>Hora</Label>
-            <Input />
+            <Controller
+              control={control}
+              name="hour"
+              render={({ field: { value, onChange } }) => (
+                <Input value={value} onChangeText={onChange} />
+              )}
+            />
           </InputContainer>
         </Row>
 
-        <RadioGroup label="Está dentro da dieta?" />
+        <Controller
+          control={control}
+          name="valid"
+          render={({ field: { value, onChange } }) => (
+            <RadioGroup
+              label="Está dentro da dieta?"
+              value={value}
+              onChange={onChange}
+            />
+          )}
+        />
 
         <Button
           style={{ marginTop: 'auto', marginBottom: 80 }}
           title="Cadastrar refeição"
-          onPress={handleRegisterMeal}
+          onPress={handleSubmit(handleRegisterMeal)}
         />
       </Form>
     </RegisterContainer>

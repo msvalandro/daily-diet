@@ -5,11 +5,11 @@ import { Dot, Label, RadioButton, RadioGroupContainer } from './styles'
 
 interface RadioGroupProps {
   label: string
+  onChange: (value: boolean) => void
+  value?: boolean
 }
 
-export function RadioGroup({ label }: RadioGroupProps) {
-  const [value, setValue] = useState<boolean>()
-
+export function RadioGroup({ label, onChange, value }: RadioGroupProps) {
   return (
     <RadioGroupContainer>
       <Label withMargin>{label}</Label>
@@ -17,7 +17,7 @@ export function RadioGroup({ label }: RadioGroupProps) {
       <Row>
         <RadioButton
           selected={value === true}
-          onPress={() => setValue(true)}
+          onPress={() => onChange(true)}
           type="SUCCESS"
           style={{ marginRight: 4 }}
         >
@@ -27,7 +27,7 @@ export function RadioGroup({ label }: RadioGroupProps) {
 
         <RadioButton
           selected={value === false}
-          onPress={() => setValue(false)}
+          onPress={() => onChange(false)}
           type="DANGER"
           style={{ marginLeft: 4 }}
         >

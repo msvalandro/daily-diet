@@ -37,7 +37,7 @@ export function Home() {
 
       <Title>Refeições</Title>
 
-      <Button title="Nova refeição" Icon={Plus} onPress={handleGoToMeal} />
+      <Button title="Nova refeição" Icon={Plus} onPress={handleNewMeal} />
     </HomeContainer>
   )
 }
