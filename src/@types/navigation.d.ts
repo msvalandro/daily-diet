@@ -3,9 +3,9 @@ export declare global {
     interface RootParamList {
       home: undefined
       statistics: undefined
-      register: undefined
+      register: { id: string } | undefined
       finished: { valid: boolean }
-      meal: undefined
+      meal: { id: string } | undefined
     }
   }
 }

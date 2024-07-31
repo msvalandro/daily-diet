@@ -2,8 +2,9 @@ import { Button } from '@components/Button'
 import { RadioGroup } from '@components/RadioGroup'
 import { Row } from '@components/Row'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useNavigation } from '@react-navigation/native'
-import { storageMealSave } from '@storage/storageMeal'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { storageMealGet, storageMealSave } from '@storage/storageMeal'
+import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
@@ -18,6 +19,10 @@ import {
   Title,
   TitleContainer,
 } from './styles'
+
+interface RouteParams {
+  id?: string
+}
 
 interface FormDataProps {
   name: string
@@ -42,23 +47,44 @@ const registerMealSchema = yup.object({
 })
 
 export function Register() {
-  const { control, handleSubmit } = useForm<FormDataProps>({
+  const { control, handleSubmit, setValue } = useForm<FormDataProps>({
     resolver: yupResolver(registerMealSchema),
   })
 
   const navigation = useNavigation()
+
+  const route = useRoute()
+  const id = (route.params as RouteParams)?.id
 
   function handleGoBack() {
     navigation.goBack()
   }
 
   async function handleRegisterMeal(data: FormDataProps) {
-    const id = new Date().getTime().toString()
-
     await storageMealSave({ id, ...data })
 
     navigation.navigate('finished', { valid: data.valid })
   }
+
+  async function fetchMeal() {
+    if (!id) {
+      return
+    }
+
+    const data = await storageMealGet(id)
+
+    if (data) {
+      setValue('name', data.name)
+      setValue('description', data.description)
+      setValue('date', data.date)
+      setValue('hour', data.hour)
+      setValue('valid', data.valid)
+    }
+  }
+
+  useEffect(() => {
+    fetchMeal()
+  }, [id])
 
   return (
     <RegisterContainer>
@@ -66,7 +92,7 @@ export function Register() {
         <TitleContainer>
           <BackIcon />
 
-          <Title>Nova refeição</Title>
+          <Title>{id ? 'Editar refeição' : 'Nova refeição'}</Title>
         </TitleContainer>
       </RegisterHeader>
 
@@ -147,7 +173,7 @@ export function Register() {
 
         <Button
           style={{ marginTop: 'auto', marginBottom: 80 }}
-          title="Cadastrar refeição"
+          title={id ? 'Salvar alterações' : 'Cadastrar refeição'}
           onPress={handleSubmit(handleRegisterMeal)}
         />
       </Form>

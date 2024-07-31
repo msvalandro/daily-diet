@@ -1,6 +1,9 @@
 import { Button } from '@components/Button'
-import { useNavigation } from '@react-navigation/native'
+import { MealDTO } from '@dtos/MealDTO'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { storageMealGet, storageMealRemove } from '@storage/storageMeal'
 import { PencilSimpleLine, Trash } from 'phosphor-react-native'
+import { useEffect, useState } from 'react'
 import { Alert } from 'react-native'
 
 import {
@@ -19,15 +22,29 @@ import {
   TitleContainer,
 } from './styles'
 
+interface RouteParams {
+  id: string
+}
+
 export function Meal() {
+  const [meal, setMeal] = useState<MealDTO>({} as MealDTO)
+
   const navigation = useNavigation()
+
+  const route = useRoute()
+  const { id } = route.params as RouteParams
 
   function handleGoBack() {
     navigation.navigate('home')
   }
 
   function handleEditMeal() {
-    navigation.navigate('register')
+    navigation.navigate('register', { id })
+  }
+
+  async function deleteMeal() {
+    await storageMealRemove(id)
+    navigation.navigate('home')
   }
 
   function handleDeleteMeal() {
@@ -36,10 +53,22 @@ export function Meal() {
       {
         style: 'destructive',
         text: 'Sim, excluir',
-        onPress: () => navigation.navigate('home'),
+        onPress: deleteMeal,
       },
     ])
   }
+
+  async function fetchMeal() {
+    const data = await storageMealGet(id)
+
+    if (data) {
+      setMeal(data)
+    }
+  }
+
+  useEffect(() => {
+    fetchMeal()
+  }, [id])
 
   return (
     <MealContainer>
@@ -53,22 +82,22 @@ export function Meal() {
 
       <Content>
         <Info>
-          <Name>Sanduíche</Name>
-          <Description>
-            Sanduíche de pão integral com atum e salada de alface e tomate
-          </Description>
+          <Name>{meal.name}</Name>
+          <Description>{meal.description}</Description>
         </Info>
 
         <Info>
           <Label>Data e hora</Label>
           <Description>
-            Sanduíche de pão integral com atum e salada de alface e tomate
+            {meal.date} às {meal.hour}
           </Description>
         </Info>
 
         <Tag>
-          <Dot type="SUCCESS" />
-          <TagLabel>dentro da dieta</TagLabel>
+          <Dot type={meal.valid ? 'SUCCESS' : 'DANGER'} />
+          <TagLabel>
+            {meal.valid ? 'dentro da dieta' : 'fora da dieta'}
+          </TagLabel>
         </Tag>
 
         <Button

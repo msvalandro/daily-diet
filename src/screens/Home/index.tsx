@@ -31,8 +31,8 @@ export function Home() {
     navigation.navigate('register')
   }
 
-  function handleGoToMeal() {
-    navigation.navigate('meal')
+  function handleGoToMeal(id: string) {
+    navigation.navigate('meal', { id })
   }
 
   async function fetchMeals() {
@@ -84,12 +84,7 @@ export function Home() {
 
       <Title>Refeições</Title>
 
-      <Button
-        title="Nova refeição"
-        Icon={Plus}
-        onPress={handleNewMeal}
-        style={{ marginBottom: 32 }}
-      />
+      <Button title="Nova refeição" Icon={Plus} onPress={handleNewMeal} />
 
       <SectionList
         sections={meals}
@@ -98,7 +93,7 @@ export function Home() {
           <SectionTitle>{section.title.replaceAll('/', '.')}</SectionTitle>
         )}
         renderItem={({ item }) => (
-          <MealCard data={item} onPress={handleGoToMeal} />
+          <MealCard data={item} onPress={() => handleGoToMeal(item.id)} />
         )}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={

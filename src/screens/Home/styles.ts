@@ -14,6 +14,7 @@ export const Title = styled.Text`
 `
 
 export const SectionTitle = styled.Text`
+  margin-top: 32px;
   margin-bottom: 8px;
 
   ${({ theme }) => css`
