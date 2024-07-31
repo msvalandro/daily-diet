@@ -7,7 +7,7 @@ import { MealsByDayDTO } from '@dtos/MealsByDayDTO'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { storageMealGetAll } from '@storage/storageMeal'
 import { Plus } from 'phosphor-react-native'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { SectionList, Text } from 'react-native'
 
 import {
@@ -62,6 +62,7 @@ export function Home() {
 
     setMeals(mealsByDay)
   }
+
   useFocusEffect(
     useCallback(() => {
       fetchMeals()

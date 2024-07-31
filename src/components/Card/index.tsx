@@ -4,7 +4,7 @@ import { TouchableOpacityProps } from 'react-native'
 import { CardContainer, CardTypeStyleProps } from './styles'
 
 interface CardProps extends TouchableOpacityProps {
-  title: string
+  title: string | number
   subtitle: string
   type?: CardTypeStyleProps
 }
