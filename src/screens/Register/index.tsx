@@ -3,6 +3,7 @@ import { RadioGroup } from '@components/RadioGroup'
 import { Row } from '@components/Row'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigation } from '@react-navigation/native'
+import { storageMealSave } from '@storage/storageMeal'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
@@ -51,9 +52,10 @@ export function Register() {
     navigation.goBack()
   }
 
-  function handleRegisterMeal(data: FormDataProps) {
-    console.log(data)
-    // navigation.navigate('finished', { valid: true })
+  async function handleRegisterMeal(data: FormDataProps) {
+    await storageMealSave(data)
+
+    navigation.navigate('finished', { valid: data.valid })
   }
 
   return (
