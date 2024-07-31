@@ -53,7 +53,9 @@ export function Register() {
   }
 
   async function handleRegisterMeal(data: FormDataProps) {
-    await storageMealSave(data)
+    const id = new Date().getTime().toString()
+
+    await storageMealSave({ id, ...data })
 
     navigation.navigate('finished', { valid: data.valid })
   }
